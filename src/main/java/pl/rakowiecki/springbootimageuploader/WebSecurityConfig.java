@@ -8,14 +8,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.rakowiecki.springbootimageuploader.model.AppUser;
 import pl.rakowiecki.springbootimageuploader.repo.AppUserRepo;
-
-import java.util.Collections;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -43,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/test1").authenticated()
+                .antMatchers("/test1").hasRole("USER")
+                .antMatchers("/test2").hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll();
     }
@@ -55,7 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @EventListener(ApplicationReadyEvent.class)
     public void get() {
-        AppUser appUser = new AppUser("Jan", passwordEncoder().encode("Nowak"), "USER");
+        AppUser appUser = new AppUser("UserJan", passwordEncoder().encode("UserJan"), "ROLE_USER");
+        AppUser appAdmin = new AppUser("AdminJan", passwordEncoder().encode("AdminJan"), "ROLE_ADMIN");
         appUserRepo.save(appUser);
+        appUserRepo.save(appAdmin);
     }
 }
