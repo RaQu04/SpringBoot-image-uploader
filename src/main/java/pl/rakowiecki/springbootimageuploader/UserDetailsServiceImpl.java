@@ -10,7 +10,7 @@ import pl.rakowiecki.springbootimageuploader.repo.AppUserRepo;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private AppUserRepo appUserRepo;
+    private final AppUserRepo appUserRepo;
 
     @Autowired
     public UserDetailsServiceImpl(AppUserRepo appUserRepo) {
@@ -19,6 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+        return appUserRepo.findByUsername(s);
     }
 }
