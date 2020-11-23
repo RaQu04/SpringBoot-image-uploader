@@ -37,11 +37,7 @@
 <!--            <artifactId>vaadin-spring-boot-starter</artifactId>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>com.cloudinary</groupId>
-            <artifactId>cloudinary-core</artifactId>
-            <version>1.27.0</version>
-        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>
@@ -64,6 +60,24 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-core</artifactId>
+            <version>1.27.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.27.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-taglib</artifactId>
+            <version>1.25.0</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
