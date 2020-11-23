@@ -1,5 +1,6 @@
 package pl.rakowiecki.springbootimageuploader;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,14 +16,23 @@ import java.util.Collections;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     protected WebSecurityConfig() {
         super();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser(new User("Jan", passwordEncoder().encode("Jan123"), Collections.singleton(new SimpleGrantedAuthority("user"))));
+//        auth.inMemoryAuthentication()
+//                .withUser(new User("Jan", passwordEncoder().encode("Jan123"), Collections.singleton(new SimpleGrantedAuthority("user"))));
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
