@@ -16,7 +16,7 @@ public class TestApi {
     }
     @GetMapping("/test3")
     public String test3() {
-        return "test3";
+        return "";
     }
 
 }
