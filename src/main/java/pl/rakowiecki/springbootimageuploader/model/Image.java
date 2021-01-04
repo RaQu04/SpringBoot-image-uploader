@@ -16,8 +16,7 @@ public class Image {
     public Image() {
     }
 
-    public Image(Long id, String imageAddress) {
-        this.id = id;
+    public Image(String imageAddress) {
         this.imageAddress = imageAddress;
     }
 
